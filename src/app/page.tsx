@@ -26,6 +26,19 @@ export default function Home() {
     }
   };
 
+  const handleCopy = () => {
+    if (!shortUrl) return;
+    navigator.clipboard
+      .writeText(shortUrl)
+      .then(() => {
+        toast.success("Short URL copied to clipboard!");
+      })
+      .catch((error) => {
+        toast.error("Failed to copy short URL");
+        console.error("Error copying short URL:", error);
+      });
+  };
+
   return (
     <main className="flex flex-col items-center justify-center min-h-screen">
       <svg
@@ -53,12 +66,43 @@ export default function Home() {
         </button>
       </form>
       {shortUrl && (
-        <p className="mt-4">
-          URL:{" "}
-          <a href={shortUrl} className="text-green-500 underline">
-            {shortUrl}
-          </a>
-        </p>
+        <>
+          <p className="mt-4">
+            <a href={shortUrl} className="text-green-500 underline">
+              {shortUrl}
+            </a>
+          </p>
+          <div className="mt-2 flex items-center justify-center">
+            <a
+              href={shortUrl}
+              className="me-2 bg-green-500 text-white px-2 py-1 rounded"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 640 640"
+                className="w-5 h-5"
+              >
+                {/*Font Awesome Free v7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.*/}
+                <path d="M192 384L88.5 384C63.6 384 48.3 356.9 61.1 335.5L114 247.3C122.7 232.8 138.3 224 155.2 224L250.2 224C326.3 95.1 439.8 88.6 515.7 99.7C528.5 101.6 538.5 111.6 540.3 124.3C551.4 200.2 544.9 313.7 416 389.8L416 484.8C416 501.7 407.2 517.3 392.7 526L304.5 578.9C283.2 591.7 256 576.3 256 551.5L256 448C256 412.7 227.3 384 192 384L191.9 384zM464 224C464 197.5 442.5 176 416 176C389.5 176 368 197.5 368 224C368 250.5 389.5 272 416 272C442.5 272 464 250.5 464 224z" />
+              </svg>
+            </a>
+            <button
+              className="bg-green-500 text-white px-2 py-1 rounded cursor-pointer"
+              onClick={handleCopy}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 640 640"
+                className="w-5 h-5"
+              >
+                {/*Font Awesome Free v7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.*/}
+                <path d="M288 64C252.7 64 224 92.7 224 128L224 384C224 419.3 252.7 448 288 448L480 448C515.3 448 544 419.3 544 384L544 183.4C544 166 536.9 149.3 524.3 137.2L466.6 81.8C454.7 70.4 438.8 64 422.3 64L288 64zM160 192C124.7 192 96 220.7 96 256L96 512C96 547.3 124.7 576 160 576L352 576C387.3 576 416 547.3 416 512L416 496L352 496L352 512L160 512L160 256L176 256L176 192L160 192z" />
+              </svg>
+            </button>
+          </div>
+        </>
       )}
     </main>
   );
