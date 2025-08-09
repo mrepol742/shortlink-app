@@ -2,6 +2,10 @@ import { NextResponse } from "next/server";
 import { redis } from "@/lib/redis";
 import { v4 as uuidv4 } from "uuid";
 
+const REDIS_TIME_TO_LIVE = process.env.REDIS_TIME_TO_LIVE
+  ? parseInt(process.env.REDIS_TIME_TO_LIVE)
+  : 60 * 60 * 24;
+const REDIS_EX = process.env.REDIS_EX === "true";
 const SLUG = process.env.SLUG_LENGTH ? parseInt(process.env.SLUG_LENGTH) : 8;
 const LOCK_DOMAIN = process.env.LOCK_DOMAIN === "true";
 const LOCK_DOMAIN_URL = process.env.LOCK_DOMAIN_URL || "";
@@ -26,7 +30,16 @@ export async function POST(req: Request) {
   }
 
   const slug = uuidv4().slice(0, SLUG);
-  await redis.set(slug, url);
+  if (REDIS_EX) {
+    await redis.set(slug, url, {
+      expiration: {
+        type: "EX",
+        value: REDIS_TIME_TO_LIVE,
+      },
+    });
+  } else {
+    await redis.set(slug, url);
+  }
 
   return NextResponse.json({
     shortUrl: `${NEXT_PUBLIC_SITE_URL}/${slug}`,

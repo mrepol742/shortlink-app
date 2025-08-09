@@ -46,7 +46,7 @@ export default function Home() {
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           placeholder="https://"
-          className="px-2 py-3 w-50 md:w-100 text-green-900 focus:outline-none"
+          className="px-2 py-3 w-60 md:w-100 text-green-900 focus:outline-none"
         />
         <button type="submit" className="bg-green-900 text-white p-3 rounded">
           Shorten
