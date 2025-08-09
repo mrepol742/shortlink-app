@@ -2,7 +2,9 @@ import { redis } from "@/lib/redis";
 import { redirect } from "next/navigation";
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{
+    slug: string;
+  }>;
 }
 
 export default async function RedirectPage({ params }: Props) {
