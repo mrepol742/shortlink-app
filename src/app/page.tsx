@@ -9,11 +9,13 @@ import { useReCaptcha } from "next-recaptcha-v3";
 export default function Home() {
   const [url, setUrl] = useState("");
   const [shortUrl, setShortUrl] = useState("");
+  const [loading, setLoading] = useState(false);
   const { executeRecaptcha } = useReCaptcha();
 
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
       e.preventDefault();
+      setLoading(true);
 
       const token = await executeRecaptcha("shortlinkapp");
       try {
@@ -30,6 +32,8 @@ export default function Home() {
           error instanceof Error ? error.message : "Failed to shorten URL"
         );
         console.error("Error shortening URL:", error);
+      } finally {
+        setLoading(false);
       }
     },
     [executeRecaptcha, url]
@@ -50,6 +54,11 @@ export default function Home() {
 
   return (
     <>
+      {loading && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm z-50">
+          <div className="w-12 h-12 border-4 border-green-800 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      )}
       <Nav />
       <main className="flex flex-col items-center justify-center min-h-screen">
         <svg
