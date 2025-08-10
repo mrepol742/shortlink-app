@@ -1,32 +1,39 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { toast } from "react-toastify";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
+import { useReCaptcha } from "next-recaptcha-v3";
 
 export default function Home() {
   const [url, setUrl] = useState("");
   const [shortUrl, setShortUrl] = useState("");
+  const { executeRecaptcha } = useReCaptcha();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      const res = await fetch("/api/shorten", {
-        method: "POST",
-        body: JSON.stringify({ url }),
-        headers: { "Content-Type": "application/json" },
-      });
-      const data = await res.json();
-      if (data.error) toast.error(data.error);
-      setShortUrl(data.shortUrl);
-    } catch (error) {
-      toast.error(
-        error instanceof Error ? error.message : "Failed to shorten URL"
-      );
-      console.error("Error shortening URL:", error);
-    }
-  };
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
+
+      const token = await executeRecaptcha("shortlinkapp");
+      try {
+        const res = await fetch("/api/shorten", {
+          method: "POST",
+          body: JSON.stringify({ url, token }),
+          headers: { "Content-Type": "application/json" },
+        });
+        const data = await res.json();
+        if (data.error) toast.error(data.error);
+        setShortUrl(data.shortUrl);
+      } catch (error) {
+        toast.error(
+          error instanceof Error ? error.message : "Failed to shorten URL"
+        );
+        console.error("Error shortening URL:", error);
+      }
+    },
+    [executeRecaptcha, url]
+  );
 
   const handleCopy = () => {
     if (!shortUrl) return;
@@ -60,6 +67,7 @@ export default function Home() {
           className="mt-4 rounded-lg border-2 border-green-800"
         >
           <input
+            name="url"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             placeholder="https://"

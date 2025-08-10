@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "next": "15.4.6",
+    "next-recaptcha-v3": "^1.5.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-toastify": "^11.0.5",
