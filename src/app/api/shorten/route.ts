@@ -39,6 +39,13 @@ export async function POST(req: Request) {
       { status: 400 }
     );
 
+  if (url.startsWith(NEXT_PUBLIC_SITE_URL)) {
+    return NextResponse.json(
+      { error: `URL must not start with ${NEXT_PUBLIC_SITE_URL}` },
+      { status: 400 }
+    );
+  }
+  
   // generate slug and store in Redis
   const slug = uuidv4().slice(0, SLUG);
   if (REDIS_EX) {
