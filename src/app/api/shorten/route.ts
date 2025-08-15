@@ -60,6 +60,6 @@ export async function POST(req: Request) {
   }
 
   return NextResponse.json({
-    shortUrl: `${NEXT_PUBLIC_SITE_URL}/${slug}`,
+    shortUrl: `${NEXT_PUBLIC_SITE_URL}/s/${slug}`,
   });
 }
