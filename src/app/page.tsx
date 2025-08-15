@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import { useReCaptcha } from "next-recaptcha-v3";
+import Link from "next/link";
 
 export default function Home() {
   const [url, setUrl] = useState("");
@@ -59,7 +60,6 @@ export default function Home() {
           <div className="w-12 h-12 border-4 border-green-800 border-t-transparent rounded-full animate-spin"></div>
         </div>
       )}
-      <Nav />
       <main className="flex flex-col items-center justify-center min-h-screen">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -86,6 +86,14 @@ export default function Home() {
             Get
           </button>
         </form>
+        <div className="text-left w-full max-w-md space-x-2">
+          <Link href="/terms" className="mt-2 text-xs text-gray-400">
+            Terms of Service
+          </Link>
+          <Link href="/privacy" className="mt-2 text-xs text-gray-400">
+            Privacy Policy
+          </Link>
+        </div>
         {shortUrl && (
           <>
             <p className="mt-4">
@@ -126,7 +134,6 @@ export default function Home() {
           </>
         )}
       </main>
-      <Footer />
     </>
   );
 }

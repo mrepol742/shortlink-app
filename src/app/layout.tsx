@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import { ReCaptchaProvider } from "next-recaptcha-v3";
+import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,11 +31,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Nav />
         <ReCaptchaProvider
           reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
         >
           {children}
         </ReCaptchaProvider>
+        <Footer />
         <ToastContainer />
       </body>
     </html>
