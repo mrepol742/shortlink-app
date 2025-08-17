@@ -80,13 +80,13 @@ export default function Home() {
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             placeholder="https://"
-            className="px-2 py-3 w-70 md:w-100 focus:outline-none"
+            className="px-2 py-3 w-80 md:w-100 focus:outline-none"
           />
           <button type="submit" className="bg-green-900 text-white p-3 rounded">
             Get
           </button>
         </form>
-        <div className="text-left w-full max-w-md space-x-2">
+        <div className="space-x-2">
           <Link href="/terms" className="mt-2 text-xs text-gray-400">
             Terms of Service
           </Link>
