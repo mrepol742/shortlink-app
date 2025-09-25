@@ -37,6 +37,7 @@ export default function RootLayout({
     >
       <head>
         <meta name="hostname" content="go.melvinjonesrepol.com" />
+        <link rel="canonical" href="https://go.melvinjonesrepol.com" />
       </head>
       <body className="antialiased">
         <Nav />
