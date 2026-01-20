@@ -2,8 +2,6 @@
 
 import { useCallback, useState } from "react";
 import { toast } from "react-toastify";
-import Nav from "./components/Nav";
-import Footer from "./components/Footer";
 import { useReCaptcha } from "next-recaptcha-v3";
 import Link from "next/link";
 
@@ -30,14 +28,14 @@ export default function Home() {
         setShortUrl(data.shortUrl);
       } catch (error) {
         toast.error(
-          error instanceof Error ? error.message : "Failed to shorten URL"
+          error instanceof Error ? error.message : "Failed to shorten URL",
         );
         console.error("Error shortening URL:", error);
       } finally {
         setLoading(false);
       }
     },
-    [executeRecaptcha, url]
+    [executeRecaptcha, url],
   );
 
   const handleCopy = () => {
@@ -80,7 +78,7 @@ export default function Home() {
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             placeholder="https://"
-            className="px-2 py-3 w-80 md:w-100 focus:outline-none"
+            className="px-2 py-3 w-auto md:w-100 focus:outline-none"
           />
           <button type="submit" className="bg-green-900 text-white p-3 rounded">
             Get
