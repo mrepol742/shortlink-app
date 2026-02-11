@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Source_Code_Pro, Maven_Pro } from "next/font/google";
 import "./globals.css";
 import { ToastContainer } from "react-toastify";
-import { ReCaptchaProvider } from "next-recaptcha-v3";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 
@@ -41,11 +40,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <Nav />
-        <ReCaptchaProvider
-          reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-        >
-          {children}
-        </ReCaptchaProvider>
+        {children}
         <Footer />
         <ToastContainer />
       </body>

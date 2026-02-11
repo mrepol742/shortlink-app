@@ -1,22 +1,42 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { useReCaptcha } from "next-recaptcha-v3";
 import Link from "next/link";
 
 export default function Home() {
   const [url, setUrl] = useState("");
   const [shortUrl, setShortUrl] = useState("");
   const [loading, setLoading] = useState(false);
-  const { executeRecaptcha } = useReCaptcha();
+  const [grecaptchaLoaded, setGrecaptchaLoaded] = useState(false);
+
+  useEffect(() => {
+    const scriptId = "recaptcha-enterprise";
+    if (!document.getElementById(scriptId)) {
+      const script = document.createElement("script");
+      script.id = scriptId;
+      script.src = `https://www.google.com/recaptcha/enterprise.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`;
+      script.async = true;
+      script.onload = () => setGrecaptchaLoaded(true);
+      document.body.appendChild(script);
+    } else {
+      setGrecaptchaLoaded(true);
+    }
+  }, []);
 
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
       e.preventDefault();
+      if (!grecaptchaLoaded || !window.grecaptcha?.enterprise) {
+        toast.error("reCAPTCHA is not loaded. Please try again later.");
+        return;
+      }
       setLoading(true);
 
-      const token = await executeRecaptcha("shortlinkapp");
+      const token = await window.grecaptcha.enterprise.execute(
+        process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? "",
+        { action: "shortlink" },
+      );
       try {
         const res = await fetch("/api/shorten", {
           method: "POST",
@@ -35,7 +55,7 @@ export default function Home() {
         setLoading(false);
       }
     },
-    [executeRecaptcha, url],
+    [url],
   );
 
   const handleCopy = () => {
