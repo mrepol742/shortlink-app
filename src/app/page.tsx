@@ -14,6 +14,8 @@ export default function Home() {
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
       e.preventDefault();
+      if (!url) return toast.error("Please enter a URL");
+
       setLoading(true);
 
       const token = await executeRecaptcha("shortlinkapp");
