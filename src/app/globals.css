@@ -1,35 +1,43 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ededed;
-  --foreground: #171717;
+    --background: #ededed;
+    --foreground: #171717;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #171717;
-    --foreground: #ededed;
-  }
+    :root {
+        --background: #171717;
+        --foreground: #ededed;
+    }
 }
 
 html {
-  transition: background-color 0.3s ease, color 0.3s ease;
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-body);
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-body);
+    scroll-behavior: smooth;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  letter-spacing: -0.05em;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.05em;
 }
 
 .grecaptcha-badge {

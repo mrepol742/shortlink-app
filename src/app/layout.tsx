@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Source_Code_Pro, Maven_Pro } from "next/font/google";
 import "./globals.css";
 import { ToastContainer } from "react-toastify";
-import Nav from "./components/Nav";
-import Footer from "./components/Footer";
+import Nav from "../components/Nav";
+import Footer from "../components/Footer";
 
 const sourceCodePro = Source_Code_Pro({
   subsets: ["latin"],
@@ -19,9 +19,13 @@ const mavenPro = Maven_Pro({
   variable: "--font-body",
 });
 
+export const revalidate = 43200; // 12 hours (in seconds)
+
 export const metadata: Metadata = {
-  title: "Shortlink App",
-  description: "Get your link, shorteeeeeen!",
+  title: "Shortlink - Get your link, shorteeeeeen!",
+  description:
+    "Shortlink is a simple URL shortening service that allows you to create short links for your long URLs.",
+  keywords: ["url", "shortener", "link", "shortlink"],
 };
 
 export default function RootLayout({
@@ -33,15 +37,21 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${sourceCodePro.variable} ${mavenPro.variable}`}
+      data-scroll-behavior="smooth"
     >
       <head>
         <meta name="hostname" content="go.melvinjonesrepol.com" />
         <link rel="canonical" href="https://go.melvinjonesrepol.com" />
       </head>
       <body className="antialiased">
-        <Nav />
-        {children}
-        <Footer />
+        <div className="bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white">
+          <Nav />
+
+          {children}
+
+          <Footer />
+        </div>
+
         <ToastContainer />
       </body>
     </html>
