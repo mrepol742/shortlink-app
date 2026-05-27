@@ -1,20 +1,32 @@
 # Shortlink App
 
-Shortlink is a simple URL shortening service that allows you to create short links for your long URLs.
+The only shortlink you will ever need.  Simple, lightweight and utilize Redis for transactions.
 
-## Getting Started
+---
 
-To get started with Shortlink, follow these steps:
+## Setup
 
-1. Clone the repository: `git clone https://github.com/mrepol742/shortlink-app.git --depth 1`
-2. Install dependencies: `npm install`
-3. Start the development server: `npm run dev`
-4. Open your browser and navigate to `http://localhost:3000`
+Install dependencies and configure `.env`
 
-## Usage
+```bash
+npm install
+cp .env.example .env
+```
 
-To use Shortlink, simply enter a long URL into the input field and click the "Shorten" button. The shortened link will be displayed below.
+## Development Server
 
-## Contributing
+To start a local development server, run:
 
-Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
+```bash
+npm run dev
+```
+
+Once the server is running, open your browser and navigate to `http://localhost:4000/`. The application will automatically reload whenever you modify any of the source files.
+
+## Building
+
+To build the project run:
+
+```bash
+npm run  build
+```
