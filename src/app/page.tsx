@@ -104,7 +104,10 @@ export default function Home() {
             <label className="block text-sm font-medium text-gray-300 mb-3">
               Paste your long URL below
             </label>
-            <form onSubmit={handleSubmit} className="flex gap-3">
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col md:flex-row gap-4"
+            >
               <div className="flex-1 flex items-center bg-gray-900 border border-white/10 rounded-xl px-4 focus-within:border-emerald-500/60 focus-within:ring-1 focus-within:ring-emerald-500/30 transition-all">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
