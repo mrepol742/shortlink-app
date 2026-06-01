@@ -22,7 +22,7 @@ const mavenPro = Maven_Pro({
 export const revalidate = 43200; // 12 hours (in seconds)
 
 export const metadata: Metadata = {
-  title: "Shortlink - Get your link, shorteeeeeen!",
+  title: "Shortlink - Shorten any URL Instantly!",
   description:
     "Shortlink is a simple URL shortening service that allows you to create short links for your long URLs.",
   keywords: ["url", "shortener", "link", "shortlink"],

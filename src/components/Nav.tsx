@@ -21,10 +21,16 @@ export default function Nav() {
           </span>
         </div>
         <div className="flex items-center gap-4 text-sm text-gray-400">
-          <Link href="/terms" className="hover:text-white transition-colors">
+          <Link
+            href="https://www.melvinjonesrepol.com/legal/terms-of-service"
+            className="hover:text-white transition-colors"
+          >
             Terms
           </Link>
-          <Link href="/privacy" className="hover:text-white transition-colors">
+          <Link
+            href="https://www.melvinjonesrepol.com/legal/privacy-policy"
+            className="hover:text-white transition-colors"
+          >
             Privacy
           </Link>
         </div>

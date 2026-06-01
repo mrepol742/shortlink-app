@@ -6,11 +6,14 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-600">
         <span>&copy;2026 Melvin Jones Repol. All rights reserved.</span>
         <div className="flex gap-4">
-          <Link href="/terms" className="hover:text-gray-400 transition-colors">
+          <Link
+            href="https://www.melvinjonesrepol.com/legal/terms-of-service"
+            className="hover:text-gray-400 transition-colors"
+          >
             Terms of Service
           </Link>
           <Link
-            href="/privacy"
+            href="https://www.melvinjonesrepol.com/legal/privacy-policy"
             className="hover:text-gray-400 transition-colors"
           >
             Privacy Policy
